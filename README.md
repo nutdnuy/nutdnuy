@@ -1,9 +1,4 @@
-- 👋 Hi, I’m @nutdnuy
-- 👀 I’m interested in Data Science & Quant Analysis
-- 🌱 I’m currently learning 
-- 💞️ I’m looking to collaborate on Quant Investment Project
-- 📫 How to reach me .Nutdnuy@gmail.com
-# Hi there, I’m [Your Name] 👋
+# Hi there, I’m Nuthdanai Wangpratham 👋
 
 Welcome to my profile! Here’s a bit about my professional interests and what drives me:
 
