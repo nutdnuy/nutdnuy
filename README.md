@@ -30,8 +30,8 @@ Interested in joining forces to grow a community or network? Let’s make it hap
 ---
 
 **📫 How to Reach Me:**  
-- [LinkedIn](https://www.linkedin.com/) (Feel free to send me a message)
-- [Email](mailto:your.email@example.com) (Always open to discussions and knowledge exchange)
+- [LinkedIn]([(https://www.linkedin.com/in/nuthdanai-w/))] (Feel free to send me a message)
+- [Email](mailto:nutdnuy@example.com) (Always open to discussions and knowledge exchange)
 
 Thanks for visiting my profile! Feel free to drop by anytime to talk quant finance, AI, or community-building efforts.
 
