@@ -17,7 +17,7 @@ I believe that Generative AI (GenAI) will be a defining force in shaping our fut
 - Practical implementations of GenAI in various sectors
 - Responsible AI frameworks and ethical considerations
 - State-of-the-art language models and multimodal systems
-- [My GenAI : ](https://www.linkedin.com/in/nuthdanai-w/)
+- [My GenAI Article ](https://nutdnuy.medium.com/)
 
 
 Have a thought on how AI can elevate your field? I’d love to hear it!
