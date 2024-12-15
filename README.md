@@ -8,6 +8,7 @@ I am deeply passionate about quantitative finance because it allows us to constr
 - Algorithmic trading strategies
 - Cutting-edge risk management approaches
 - Novel quantitative research methodologies
+- [My Quantitative Finance article : ](https://www.quantseras.com/blog)
 
 If you share these interests, let’s connect, collaborate, and exchange ideas.
 
@@ -16,6 +17,8 @@ I believe that Generative AI (GenAI) will be a defining force in shaping our fut
 - Practical implementations of GenAI in various sectors
 - Responsible AI frameworks and ethical considerations
 - State-of-the-art language models and multimodal systems
+- [My GenAI : ](https://www.linkedin.com/in/nuthdanai-w/)
+
 
 Have a thought on how AI can elevate your field? I’d love to hear it!
 
@@ -35,9 +38,6 @@ Interested in joining forces to grow a community or network? Let’s make it hap
 
 Thanks for visiting my profile! Feel free to drop by anytime to talk quant finance, AI, or community-building efforts.
 
-**📫 My Blok:** 
-- [GenAI : ](https://www.linkedin.com/in/nuthdanai-w/)
-- [Quantitative Finance : ](https://www.quantseras.com/blog)
 
 
 
