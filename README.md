@@ -35,6 +35,14 @@ Interested in joining forces to grow a community or network? Let’s make it hap
 
 Thanks for visiting my profile! Feel free to drop by anytime to talk quant finance, AI, or community-building efforts.
 
+**📫 My Blok:** 
+- [GenAI : ](https://www.linkedin.com/in/nuthdanai-w/)
+- [Quantitative Finance : ](https://www.quantseras.com/blog)
+
+
+
+
+
 <!---
 nutdnuy/nutdnuy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
