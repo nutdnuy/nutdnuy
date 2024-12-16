@@ -8,7 +8,7 @@ I am deeply passionate about quantitative finance because it allows us to constr
 - Algorithmic trading strategies
 - Cutting-edge risk management approaches
 - Novel quantitative research methodologies
-- [My Quantitative Finance article : ](https://www.quantseras.com/blog)
+- [My Quantitative Finance article ](https://www.quantseras.com/blog)
 
 If you share these interests, let’s connect, collaborate, and exchange ideas.
 
