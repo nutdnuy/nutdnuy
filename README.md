@@ -1,49 +1,67 @@
-# Hi there, I’m Nuthdanai Wangpratham 👋
+<div align="center">
 
-Welcome to my profile! Here’s a bit about my professional interests and what drives me:
+![Nuthdanai Wangpratham - Quant Finance, AI Agents, Investment Research](https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0B1220,45:0E7C66,100:F59E0B&text=Nuthdanai%20Wangpratham&fontColor=FFFFFF&fontSize=42&fontAlignY=38&desc=Quant%20Finance%20%7C%20AI%20Agents%20%7C%20Investment%20Research&descSize=18&descAlignY=58)
 
-## 🌐 Quantitative Finance
-I am deeply passionate about quantitative finance because it allows us to construct systematic, data-driven investment strategies. By reducing human bias and leveraging advanced models, quant finance enables more transparent, repeatable decision-making processes. I’m always eager to discuss:
-- Portfolio optimization techniques
-- Algorithmic trading strategies
-- Cutting-edge risk management approaches
-- Novel quantitative research methodologies
-- [My Quantitative Finance article ](https://www.quantseras.com/blog)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nuthdanai%20W.-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nuthdanai-w/)
+[![QuantSeras](https://img.shields.io/badge/QuantSeras-Blog-0E7C66?style=for-the-badge)](https://www.quantseras.com/blog)
+[![Medium](https://img.shields.io/badge/Medium-Articles-111111?style=for-the-badge&logo=medium&logoColor=white)](https://nutdnuy.medium.com/)
+[![YouTube](https://img.shields.io/badge/YouTube-@NuthdanaiW-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@NuthdanaiW)
 
-If you share these interests, let’s connect, collaborate, and exchange ideas.
+</div>
 
-## 🤖 Generative AI Adoption
-I believe that Generative AI (GenAI) will be a defining force in shaping our future work environments. By blending productivity with creative insight, GenAI has the potential to transform entire industries. I enjoy exploring:
-- Practical implementations of GenAI in various sectors
-- Responsible AI frameworks and ethical considerations
-- State-of-the-art language models and multimodal systems
-- [My GenAI Article ](https://nutdnuy.medium.com/)
+## I build AI-native systems for investment research
 
+I work at the intersection of quantitative finance, AI agents, and financial education. My GitHub is where I turn research papers, market data, and investment workflows into reproducible tools.
 
-Have a thought on how AI can elevate your field? I’d love to hear it!
+- Building agentic workflows for alpha research, portfolio analysis, and financial reporting.
+- Developing practical tooling around WorldQuant BRAIN, QuantConnect, Thai SEC Open Data, and research-paper-to-code pipelines.
+- Writing and teaching applied quant + AI workflows for investors, builders, and finance teams.
 
-## 🤝 Community Building
-I am dedicated to building and nurturing communities that promote open dialogue, shared learning, and collective advancement. Whether through industry-specific forums, mentorship programs, or open-source initiatives, I strive to foster spaces where everyone can:
-- Connect with like-minded professionals
-- Share experiences and best practices
-- Develop new skills through collaborative growth
+## Featured Projects
 
-Interested in joining forces to grow a community or network? Let’s make it happen!
+| Project | What it does | Start here if you care about |
+|---|---|---|
+| [quant-investment-papers](https://github.com/nutdnuy/quant-investment-papers) | Curated research library for alpha, factors, algorithmic trading, and portfolio management. | Finding serious papers faster. |
+| [brain-paper-to-alpha-plugin](https://github.com/nutdnuy/brain-paper-to-alpha-plugin) | Claude Code / Codex plugin for turning papers into WorldQuant BRAIN alpha research workflows. | Agentic alpha research. |
+| [sec-opendata-th](https://github.com/nutdnuy/sec-opendata-th) | Python client and agent plugin for Thailand SEC OpenAPI data. | Thai fund, NAV, factsheet, and SEC data automation. |
+| [quantcoder-plugin](https://github.com/nutdnuy/quantcoder-plugin) | Agent-native wrapper for research-paper-to-QuantConnect workflows. | Moving from paper ideas to LEAN-style implementation. |
+| [finrobot-plugin](https://github.com/nutdnuy/finrobot-plugin) | Claude Code / Codex adapter for FinRobot-style financial research and report generation. | Structured financial analysis workflows. |
+| [self-driving-portfolio-skill](https://github.com/nutdnuy/self-driving-portfolio-skill) | Multi-agent strategic asset allocation workflow using macro data and portfolio research. | Portfolio construction with agentic research loops. |
 
----
+## Current Focus
 
-**📫 How to Reach Me:**  
-- [LinkedIn](https://www.linkedin.com/in/nuthdanai-w/) (Feel free to send me a message)
-- [Email](mailto:nutdnuy@example.com) (Always open to discussions and knowledge exchange)
+```text
+Research papers -> alpha hypotheses -> reproducible experiments -> decision-ready analysis
+```
 
-Thanks for visiting my profile! Feel free to drop by anytime to talk quant finance, AI, or community-building efforts.
+- WorldQuant BRAIN alpha proposal pipelines.
+- Research-paper-to-code systems for quant developers.
+- AI-assisted investment research and reporting.
+- Financial education products for Thai investors and AI builders.
 
+## Toolbelt
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=111111)
+![Finance](https://img.shields.io/badge/Finance-Research-0E7C66?style=flat-square)
 
+## GitHub Snapshot
 
+<p align="center">
+  <img height="165" alt="Nuthdanai's GitHub stats" src="https://github-readme-stats.vercel.app/api?username=nutdnuy&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github" />
+  <img height="165" alt="Top languages" src="https://github-readme-stats.vercel.app/api/top-langs/?username=nutdnuy&layout=compact&theme=tokyonight&hide_border=true" />
+</p>
 
+## Connect
 
-<!---
-nutdnuy/nutdnuy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+I am most interested in collaborations around quant research automation, AI agents for finance, market data tooling, and practical investor education.
+
+- [LinkedIn](https://www.linkedin.com/in/nuthdanai-w/)
+- [QuantSeras Blog](https://www.quantseras.com/blog)
+- [Medium](https://nutdnuy.medium.com/)
+- [YouTube @NuthdanaiW](https://www.youtube.com/@NuthdanaiW)
