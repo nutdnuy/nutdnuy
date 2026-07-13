@@ -1,6 +1,10 @@
 <div align="center">
 
-![Nuthdanai Wangpratham - Quant Finance, AI Agents, Investment Research](https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0B1220,45:0E7C66,100:F59E0B&text=Nuthdanai%20Wangpratham&fontColor=FFFFFF&fontSize=42&fontAlignY=38&desc=Quant%20Finance%20%7C%20AI%20Agents%20%7C%20Investment%20Research&descSize=18&descAlignY=58)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero/dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero/light.svg">
+  <img alt="Nuthdanai Wangpratham — Quant finance, AI agents, and investment research" src="./assets/profile-hero/light.svg" width="100%">
+</picture>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Nuthdanai%20W.-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nuthdanai-w/)
 [![QuantSeras](https://img.shields.io/badge/QuantSeras-Blog-0E7C66?style=for-the-badge)](https://www.quantseras.com/blog)
