@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero/cinematic-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero/cinematic-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero/cinematic-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero/cinematic-light.svg">
   <img alt="Nuthdanai Wangpratham — Quant researcher and AI agent builder" src="./assets/profile-hero/cinematic-light.png" width="100%">
 </picture>
 

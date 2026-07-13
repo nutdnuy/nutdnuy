@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Bake title cards over the Image Generator scene for GitHub profile use."""
 
+import base64
 from pathlib import Path
-import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,7 +15,7 @@ THEMES = {
 }
 
 
-def svg(theme: dict[str, str]) -> str:
+def svg(theme: dict[str, str], image_data: str) -> str:
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610">
   <defs>
     <linearGradient id="rightScrim" x1="0" y1="0" x2="1" y2="0">
@@ -28,8 +28,22 @@ def svg(theme: dict[str, str]) -> str:
   <rect width="1180" height="610" rx="34" fill="{theme['outer']}"/>
   <rect x="10" y="10" width="1160" height="590" rx="28" fill="#101614" stroke="{theme['rim']}" stroke-width="2"/>
   <clipPath id="frame"><rect x="27" y="27" width="1126" height="556" rx="23"/></clipPath>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   <g clip-path="url(#frame)">
-    <image href="{SOURCE}" x="0" y="0" width="1180" height="610" preserveAspectRatio="none"/>
+    <image href="data:image/png;base64,{image_data}" x="0" y="0" width="1180" height="610" preserveAspectRatio="none"/>
+    <g id="portal-motion" fill="none" filter="url(#glow)">
+      <ellipse cx="358" cy="282" rx="247" ry="235" stroke="#69F0AE" stroke-opacity=".5" stroke-width="3" stroke-dasharray="8 20">
+        <animateTransform attributeName="transform" type="rotate" from="0 358 282" to="360 358 282" dur="18s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="358" cy="282" rx="220" ry="209" stroke="#03DAC6" stroke-opacity=".44" stroke-width="2" stroke-dasharray="4 16">
+        <animateTransform attributeName="transform" type="rotate" from="360 358 282" to="0 358 282" dur="12s" repeatCount="indefinite"/>
+      </ellipse>
+    </g>
+    <g fill="#69F0AE" filter="url(#glow)">
+      <circle cx="164" cy="230" r="3"><animateMotion dur="5.5s" repeatCount="indefinite" path="M0 0 C 115 -74, 322 22, 435 78"/><animate attributeName="opacity" values="0;1;0" dur="5.5s" repeatCount="indefinite"/></circle>
+      <circle cx="514" cy="433" r="2"><animateMotion dur="6.5s" repeatCount="indefinite" path="M0 0 C -82 -88, -221 -104, -356 -258"/><animate attributeName="opacity" values="0;.9;0" dur="6.5s" begin="-2s" repeatCount="indefinite"/></circle>
+      <circle cx="459" cy="158" r="2.5"><animateMotion dur="7.4s" repeatCount="indefinite" path="M0 0 C 87 66, 112 190, 18 284"/><animate attributeName="opacity" values="0;.8;0" dur="7.4s" begin="-4s" repeatCount="indefinite"/></circle>
+    </g>
     <rect x="615" y="27" width="538" height="556" fill="url(#rightScrim)"/>
   </g>
   <g filter="url(#shadow)" font-family="Avenir Next, SF Pro Display, Helvetica Neue, sans-serif">
@@ -41,28 +55,24 @@ def svg(theme: dict[str, str]) -> str:
     <path d="M720 259 H1058" stroke="#FFFFFF" stroke-opacity=".15"/>
     <text x="720" y="300" fill="#69F0AE" font-size="16" font-weight="800" letter-spacing="1.1">QUANT RESEARCHER</text>
     <text x="720" y="327" fill="#03DAC6" font-size="16" font-weight="800" letter-spacing="1.1">· AI AGENT BUILDER</text>
-    <path d="M720 353 H1058" stroke="#03DAC6" stroke-opacity=".72"/>
+    <path d="M720 353 H1058" stroke="#03DAC6" stroke-opacity=".72"><animate attributeName="stroke-opacity" values=".25;.9;.25" dur="2.6s" repeatCount="indefinite"/></path>
     <text x="720" y="400" fill="#F8FAFC" font-size="13" font-weight="750" letter-spacing=".8">PAPERS → ALPHAS</text>
     <text x="720" y="433" fill="#F8FAFC" font-size="13" font-weight="750" letter-spacing=".8">AGENTS → WORKFLOWS</text>
     <text x="720" y="466" fill="#F8FAFC" font-size="13" font-weight="750" letter-spacing=".8">RESEARCH → DECISIONS</text>
-    <circle cx="726" cy="501" r="5" fill="#00E676"/>
+    <circle cx="726" cy="501" r="5" fill="#00E676"><animate attributeName="r" values="4;7;4" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;1;.45" dur="1.5s" repeatCount="indefinite"/></circle>
     <text x="742" y="505" fill="#B0BEC5" font-size="10" font-weight="700" letter-spacing="1.1">BANGKOK · QUANTSERAS · @NUTDNUY</text>
   </g>
 </svg>'''
 
 
 def main() -> None:
-    if not (ASSETS / SOURCE).exists():
-        raise FileNotFoundError(ASSETS / SOURCE)
+    source_path = ASSETS / SOURCE
+    if not source_path.exists():
+        raise FileNotFoundError(source_path)
+    image_data = base64.b64encode(source_path.read_bytes()).decode("ascii")
     for name, theme in THEMES.items():
-        source = ASSETS / f"cinematic-{name}.svg"
-        output = ASSETS / f"cinematic-{name}.png"
-        source.write_text(svg(theme), encoding="utf-8")
-        subprocess.run(
-            ["rsvg-convert", "-w", "1180", "-h", "610", str(source), "-o", str(output)],
-            check=True,
-        )
-        source.unlink()
+        output = ASSETS / f"cinematic-{name}.svg"
+        output.write_text(svg(theme, image_data), encoding="utf-8")
 
 
 if __name__ == "__main__":
