@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate matching dark and light animated GitHub profile hero SVGs."""
+"""Generate two original animated sci-fi parody heroes for the profile README."""
 
 from pathlib import Path
 
@@ -7,256 +7,203 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "assets" / "profile-hero"
 
+SCENE = {
+    "name": "Nuthdanai Wangpratham",
+    "role_left": "QUANT RESEARCHER",
+    "role_right": "AI AGENT BUILDER",
+    "proof_points": ("PAPERS → ALPHAS", "AGENTS → WORKFLOWS", "RESEARCH → DECISIONS"),
+    "footer": "BANGKOK · QUANTSERAS · @NUTDNUY",
+}
 
 THEMES = {
     "dark": {
-        "bg": "#030712",
-        "panel": "#0F172A",
-        "panel_alt": "#111B31",
-        "text": "#F8FAFC",
-        "muted": "#94A3B8",
-        "hairline": "#FFFFFF",
-        "hairline_opacity": ".09",
-        "accent_a": "#7C3AED",
-        "accent_b": "#22D3EE",
-        "accent_c": "#10B981",
-        "shadow": "#020617",
-        "glow_opacity": ".26",
-        "noise_opacity": ".045",
-        "reflection_opacity": ".11",
+        "outer": "#0C1513",
+        "rim": "#1C2C28",
+        "canvas": "#121212",
+        "surface": "#1D1D1D",
+        "surface_2": "#242424",
+        "ink": "#F5F7F6",
+        "muted": "#AAB8B3",
+        "line": "#FFFFFF",
+        "portal_a": "#69F0AE",
+        "portal_b": "#03DAC6",
+        "signal": "#00E676",
+        "orange": "#FFB74D",
+        "glow": ".34",
     },
     "light": {
-        "bg": "#FFFFFF",
-        "panel": "#F8FAFC",
-        "panel_alt": "#F1F5F9",
-        "text": "#0F172A",
-        "muted": "#475569",
-        "hairline": "#0F172A",
-        "hairline_opacity": ".08",
-        "accent_a": "#2563EB",
-        "accent_b": "#06B6D4",
-        "accent_c": "#10B981",
-        "shadow": "#64748B",
-        "glow_opacity": ".13",
-        "noise_opacity": ".025",
-        "reflection_opacity": ".32",
+        "outer": "#E9F5F0",
+        "rim": "#B7D8CC",
+        "canvas": "#121212",
+        "surface": "#1D1D1D",
+        "surface_2": "#242424",
+        "ink": "#F5F7F6",
+        "muted": "#AAB8B3",
+        "line": "#FFFFFF",
+        "portal_a": "#69F0AE",
+        "portal_b": "#03DAC6",
+        "signal": "#00E676",
+        "orange": "#FFB74D",
+        "glow": ".40",
     },
 }
 
 
-ASCII_LINES = [
-    "              .+*##*+.",
-    "          .=#%%%%%%%%#=.",
-    "        .+%%%#*++++*#%%%=",
-    "       -%%%*.        .*%%#-",
-    "      +%%#:   .::::.   -%%#+",
-    "     -%%%-  .+#%%%%#+.  =%%%-",
-    "     #%%*   *%%+::+%%*   #%%#",
-    "    .%%%=   %%#.  .#%%   =%%%.",
-    "     #%%*   +%%*..*%%+   *%%#",
-    "     =%%%-   =#%%%%#=   -%%%+",
-    "      +%%#-   .+##+.   -#%%+",
-    "       *%%%*:  ____  :*%%%*",
-    "        =%%%%#=----=#%%%%=",
-    "          +#%%%%%%%%%%#+",
-    "        .---=+*####*+=---.",
-    "     .-==.   N U T D N U Y  ==-.",
-]
-
-
-SKILLS = [
-    ("Python", 704, 403, 84),
-    ("AI Agents", 797, 403, 103),
-    ("Quant", 910, 403, 76),
-    ("Research", 996, 403, 91),
-    ("Git", 704, 441, 60),
-    ("Docker", 774, 441, 78),
-    ("APIs", 862, 441, 64),
-    ("Data", 936, 441, 66),
-    ("Portfolio", 1012, 441, 86),
-]
-
-
-def details_rows(c):
-    rows = [
-        ("LOC", "Bangkok, Thailand"),
-        ("EDU", "Quant Finance + Applied AI"),
-        ("NOW", "Agentic investment research"),
-        ("WEB", "quantseras.com/blog"),
-        ("MAIL", "Connect via LinkedIn"),
+def particles(c: dict[str, str]) -> str:
+    dots = [
+        (126, 156, 3, "M0 0 C 76 -72, 188 24, 300 18", 8),
+        (168, 476, 2, "M0 0 C 80 -74, 196 -40, 286 -134", 10),
+        (452, 170, 2, "M0 0 C -68 76, 38 152, -50 274", 9),
+        (528, 468, 3, "M0 0 C -92 -40, -78 -172, -212 -238", 11),
+        (312, 108, 2, "M0 0 C 90 44, 10 112, 144 184", 7),
+        (604, 274, 2, "M0 0 C -86 54, -174 8, -276 90", 12),
     ]
-    out = []
-    for i, (key, value) in enumerate(rows):
-        y = 242 + i * 31
-        delay = .9 + i * .22
-        begin = delay - 3.0
-        out.append(
-            f'''<g opacity="1">
-  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.08;0.14;0.88;1" dur="12s" begin="{begin:.2f}s" repeatCount="indefinite"/>
-  <animateTransform attributeName="transform" type="translate" values="12 0;12 0;0 0;0 0;0 -2" keyTimes="0;0.08;0.14;0.88;1" dur="12s" begin="{begin:.2f}s" repeatCount="indefinite"/>
-  <text x="704" y="{y}" fill="{c['accent_b']}" font-size="10" font-weight="700" letter-spacing="1.4">{key}</text>
-  <text x="758" y="{y}" fill="{c['muted']}" font-size="13">{value}</text>
-</g>'''
+    result = []
+    for i, (x, y, radius, path, duration) in enumerate(dots):
+        color = c["portal_a"] if i % 2 == 0 else c["portal_b"]
+        result.append(
+            f'''<circle cx="{x}" cy="{y}" r="{radius}" fill="{color}" filter="url(#softGlow)">
+  <animate attributeName="opacity" values="0;.9;.25;0" dur="{duration}s" begin="-{i + 1}s" repeatCount="indefinite"/>
+  <animateMotion dur="{duration}s" begin="-{i + 1}s" repeatCount="indefinite" path="{path}"/>
+</circle>'''
         )
-    return "\n".join(out)
+    return "\n".join(result)
 
 
-def skill_pills(c):
-    out = []
-    for i, (label, x, y, width) in enumerate(SKILLS):
-        delay = i * .24
-        begin = delay - 2.5
-        out.append(
-            f'''<g opacity="1">
-  <animate attributeName="opacity" values="0;1;1;.78;1" keyTimes="0;.15;.62;.80;1" dur="5.6s" begin="{begin:.2f}s" repeatCount="indefinite"/>
-  <rect x="{x}" y="{y}" width="{width}" height="28" rx="14" fill="url(#pillFill)" stroke="url(#accent)" stroke-opacity=".42" filter="url(#pillGlow)"/>
-  <circle cx="{x + 14}" cy="{y + 14}" r="3" fill="{c['accent_c']}"><animate attributeName="opacity" values=".45;1;.45" dur="2.4s" begin="{delay:.2f}s" repeatCount="indefinite"/></circle>
-  <text x="{x + 24}" y="{y + 18}" fill="{c['text']}" font-size="10.5" font-weight="600" letter-spacing=".2">{label}</text>
-</g>'''
-        )
-    return "\n".join(out)
-
-
-def typing_phrases(c):
-    phrases = [
-        ("Quant Research Engineer", 290),
-        ("AI Agent Builder", 205),
-        ("Investment Researcher", 260),
-        ("Open Source Contributor", 282),
-        ("Financial Educator", 220),
-    ]
-    out = []
-    for i, (phrase, width) in enumerate(phrases):
-        start = max(.001, i * .2)
-        reveal = start + .026
-        hold = start + .168
-        fade = start + .195
-        base_opacity = "1" if i == 0 else "0"
-        out.append(
-            f'''<g opacity="{base_opacity}" clip-path="url(#typeClip{i})">
-  <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;{start:.3f};{hold:.3f};{fade:.3f};1" dur="15s" repeatCount="indefinite"/>
-  <text x="704" y="207" fill="url(#accent)" font-size="20" font-weight="650" letter-spacing=".2">{phrase}</text>
-  <rect x="{704 + width}" y="190" width="8" height="20" rx="1" fill="{c['accent_b']}">
-    <animate attributeName="x" values="704;704;{704 + width};{704 + width};704" keyTimes="0;{start:.3f};{reveal:.3f};{fade:.3f};1" dur="15s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;0;1;0;1" dur=".78s" repeatCount="indefinite"/>
+def proof_cards(c: dict[str, str]) -> str:
+    rows = []
+    for i, label in enumerate(SCENE["proof_points"]):
+        y = 366 + i * 48
+        accent = c["portal_a"] if i != 1 else c["portal_b"]
+        rows.append(
+            f'''<g>
+  <rect x="722" y="{y}" width="390" height="34" rx="10" fill="{c['surface_2']}" stroke="{c['line']}" stroke-opacity=".08"/>
+  <rect x="722" y="{y}" width="5" height="34" rx="2.5" fill="{accent}">
+    <animate attributeName="height" values="34;20;34" dur="2.8s" begin="-{i}s" repeatCount="indefinite"/>
   </rect>
-</g>
-<clipPath id="typeClip{i}"><rect x="704" y="185" width="{width + 12}" height="28"><animate attributeName="width" values="0;0;{width + 12};{width + 12};0" keyTimes="0;{start:.3f};{reveal:.3f};{fade:.3f};1" dur="15s" repeatCount="indefinite"/></rect></clipPath>'''
+  <text x="742" y="{y + 22}" fill="{c['ink']}" font-size="13" font-weight="700" letter-spacing=".7">{label}</text>
+</g>'''
         )
-    return "\n".join(out)
+    return "\n".join(rows)
 
 
-def ascii_rows(c):
-    out = []
-    for i, line in enumerate(ASCII_LINES):
-        y = 125 + i * 23
-        delay = .35 + i * .11
-        begin = delay - 2.5
-        safe = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        out.append(
-            f'''<g clip-path="url(#asciiClip{i})" opacity="1">
-  <animate attributeName="opacity" from="0" to="1" dur=".5s" begin="{begin:.2f}s" fill="freeze"/>
-  <text x="82" y="{y}" fill="url(#asciiGradient)" font-size="15.5" font-weight="700" letter-spacing=".25" filter="url(#asciiGlow)">{safe}</text>
-</g>
-<clipPath id="asciiClip{i}"><rect x="75" y="{y - 18}" width="390" height="23"><animate attributeName="width" from="0" to="390" dur=".85s" begin="{begin:.2f}s" fill="freeze"/></rect></clipPath>'''
-        )
-    return "\n".join(out)
-
-
-def render(theme, c):
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
-<title id="title">Nuthdanai Wangpratham — Quant finance and AI agent builder</title>
-<desc id="desc">Animated terminal-style GitHub profile banner with an ASCII portrait, professional details, skills, and social links.</desc>
+def render(theme: str, c: dict[str, str]) -> str:
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610" role="img" aria-labelledby="title desc">
+<title id="title">{SCENE['name']} — Quant researcher and AI agent builder</title>
+<desc id="desc">An original animated sci-fi parody scene: a quant scientist and junior analyst emerge from a luminous research portal.</desc>
 <defs>
-  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="{c['accent_a']}"><animate attributeName="stop-color" values="{c['accent_a']};{c['accent_b']};{c['accent_a']}" dur="8s" repeatCount="indefinite"/></stop>
-    <stop offset=".52" stop-color="{c['accent_b']}"><animate attributeName="stop-color" values="{c['accent_b']};{c['accent_c']};{c['accent_b']}" dur="8s" repeatCount="indefinite"/></stop>
-    <stop offset="1" stop-color="{c['accent_c']}"><animate attributeName="stop-color" values="{c['accent_c']};{c['accent_a']};{c['accent_c']}" dur="8s" repeatCount="indefinite"/></stop>
-    <animate attributeName="x1" values="0;1;0" dur="10s" repeatCount="indefinite"/><animate attributeName="x2" values="1;0;1" dur="10s" repeatCount="indefinite"/>
+  <linearGradient id="portalGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="{c['portal_a']}"/>
+    <stop offset=".55" stop-color="{c['portal_b']}"/>
+    <stop offset="1" stop-color="{c['signal']}"/>
+    <animate attributeName="x1" values="0;1;0" dur="9s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="1;0;1" dur="9s" repeatCount="indefinite"/>
   </linearGradient>
-  <linearGradient id="asciiGradient" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{c['accent_b']}"/><stop offset=".5" stop-color="{c['accent_a']}"/><stop offset="1" stop-color="{c['accent_c']}"/><animate attributeName="x1" values="-.4;.8;-.4" dur="7s" repeatCount="indefinite"/><animate attributeName="x2" values=".6;1.8;.6" dur="7s" repeatCount="indefinite"/></linearGradient>
-  <linearGradient id="border" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="{c['hairline']}" stop-opacity=".04"/><stop offset=".45" stop-color="{c['accent_b']}" stop-opacity=".75"/><stop offset=".55" stop-color="{c['accent_a']}" stop-opacity=".75"/><stop offset="1" stop-color="{c['hairline']}" stop-opacity=".04"/><animate attributeName="x1" values="-1;1" dur="5s" repeatCount="indefinite"/><animate attributeName="x2" values="0;2" dur="5s" repeatCount="indefinite"/></linearGradient>
-  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="{c['hairline']}" stop-opacity="{c['reflection_opacity']}"/><stop offset=".38" stop-color="{c['panel']}" stop-opacity=".7"/><stop offset="1" stop-color="{c['panel_alt']}" stop-opacity=".92"/></linearGradient>
-  <linearGradient id="pillFill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="{c['accent_a']}" stop-opacity=".12"/><stop offset="1" stop-color="{c['accent_b']}" stop-opacity=".06"/></linearGradient>
-  <radialGradient id="orbA"><stop stop-color="{c['accent_a']}" stop-opacity="{c['glow_opacity']}"/><stop offset="1" stop-color="{c['accent_a']}" stop-opacity="0"/></radialGradient>
-  <radialGradient id="orbB"><stop stop-color="{c['accent_b']}" stop-opacity="{c['glow_opacity']}"/><stop offset="1" stop-color="{c['accent_b']}" stop-opacity="0"/></radialGradient>
-  <radialGradient id="orbC"><stop stop-color="{c['accent_c']}" stop-opacity="{c['glow_opacity']}"/><stop offset="1" stop-color="{c['accent_c']}" stop-opacity="0"/></radialGradient>
-  <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="{c['shadow']}" flood-opacity=".34"/></filter>
-  <filter id="asciiGlow" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="pillGlow" x="-30%" y="-70%" width="160%" height="240%"><feGaussianBlur in="SourceGraphic" stdDeviation=".7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" seed="17"><animate attributeName="seed" values="17;31;17" dur="10s" repeatCount="indefinite"/></feTurbulence><feColorMatrix type="saturate" values="0"/></filter>
-  <clipPath id="frameClip"><rect x="10" y="10" width="1160" height="590" rx="30"/></clipPath>
+  <linearGradient id="cardGradient" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="{c['surface_2']}"/><stop offset="1" stop-color="{c['canvas']}"/>
+  </linearGradient>
+  <radialGradient id="portalCore"><stop stop-color="{c['portal_a']}" stop-opacity=".34"/><stop offset=".55" stop-color="{c['portal_b']}" stop-opacity=".11"/><stop offset="1" stop-color="{c['canvas']}" stop-opacity="0"/></radialGradient>
+  <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="portalGlow" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="14" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <clipPath id="sceneClip"><rect x="42" y="42" width="634" height="526" rx="28"/></clipPath>
 </defs>
+<g font-family="Geist, Avenir Next, SF Pro Display, Segoe UI, sans-serif">
+  <rect x="10" y="10" width="1160" height="590" rx="34" fill="{c['outer']}"/>
+  <rect x="11" y="11" width="1158" height="588" rx="33" fill="none" stroke="{c['rim']}" stroke-width="2"/>
+  <rect x="27" y="27" width="1126" height="556" rx="28" fill="{c['canvas']}"/>
 
-<g font-family="Geist Mono, SFMono-Regular, Cascadia Code, Segoe UI Mono, monospace">
-  <rect x="10" y="10" width="1160" height="590" rx="30" fill="{c['bg']}"/>
-  <g clip-path="url(#frameClip)">
-    <circle cx="150" cy="120" r="280" fill="url(#orbA)"><animate attributeName="cx" values="100;220;100" dur="13s" repeatCount="indefinite"/><animate attributeName="cy" values="90;155;90" dur="11s" repeatCount="indefinite"/></circle>
-    <circle cx="1020" cy="130" r="300" fill="url(#orbB)"><animate attributeName="cx" values="1060;930;1060" dur="16s" repeatCount="indefinite"/></circle>
-    <circle cx="690" cy="570" r="280" fill="url(#orbC)"><animate attributeName="cy" values="600;515;600" dur="14s" repeatCount="indefinite"/></circle>
-    <rect x="10" y="10" width="1160" height="590" filter="url(#noise)" opacity="{c['noise_opacity']}"/>
-    <g fill="{c['accent_b']}">
-      <circle cx="52" cy="84" r="1.5"><animateMotion dur="9s" repeatCount="indefinite" path="M0 0 C 50 -20, 90 40, 150 0"/><animate attributeName="opacity" values="0;.8;0" dur="9s" repeatCount="indefinite"/></circle>
-      <circle cx="900" cy="535" r="1"><animateMotion dur="12s" repeatCount="indefinite" path="M0 0 C -80 -40, -30 -120, 50 -160"/><animate attributeName="opacity" values="0;.6;0" dur="12s" repeatCount="indefinite"/></circle>
-      <circle cx="560" cy="72" r="1.2"><animateMotion dur="10s" repeatCount="indefinite" path="M0 0 C 40 60, -20 120, 35 180"/><animate attributeName="opacity" values=".1;.7;.1" dur="10s" repeatCount="indefinite"/></circle>
+  <g clip-path="url(#sceneClip)">
+    <rect x="42" y="42" width="634" height="526" rx="28" fill="#161C1A"/>
+    <circle cx="324" cy="309" r="260" fill="url(#portalCore)" opacity="{c['glow']}"/>
+    <g id="portal" filter="url(#portalGlow)">
+      <ellipse cx="326" cy="304" rx="232" ry="222" fill="none" stroke="url(#portalGradient)" stroke-width="18" opacity=".84">
+        <animateTransform attributeName="transform" type="rotate" from="0 326 304" to="360 326 304" dur="30s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="326" cy="304" rx="207" ry="197" fill="none" stroke="{c['portal_b']}" stroke-width="3" stroke-opacity=".72" stroke-dasharray="6 12">
+        <animateTransform attributeName="transform" type="rotate" from="360 326 304" to="0 326 304" dur="20s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="326" cy="304" rx="184" ry="176" fill="none" stroke="{c['portal_a']}" stroke-width="2" stroke-opacity=".42" stroke-dasharray="3 13">
+        <animateTransform attributeName="transform" type="rotate" from="0 326 304" to="360 326 304" dur="16s" repeatCount="indefinite"/>
+      </ellipse>
     </g>
-    <rect x="0" y="-80" width="1180" height="90" fill="url(#accent)" opacity=".035"><animate attributeName="y" values="-90;620" dur="7s" repeatCount="indefinite"/></rect>
-  </g>
-
-  <rect x="11" y="11" width="1158" height="588" rx="29" fill="none" stroke="url(#border)" stroke-width="1.5"/>
-  <g filter="url(#shadow)">
-    <rect x="44" y="48" width="444" height="514" rx="25" fill="url(#glass)" stroke="{c['hairline']}" stroke-opacity="{c['hairline_opacity']}"/>
-    <rect x="506" y="48" width="630" height="514" rx="25" fill="url(#glass)" stroke="{c['hairline']}" stroke-opacity="{c['hairline_opacity']}"/>
-  </g>
-  <path d="M64 50 H462 Q484 50 486 72 V114 C350 76 210 67 64 86Z" fill="{c['hairline']}" opacity="{c['reflection_opacity']}"/>
-  <path d="M526 50 H1110 Q1134 50 1134 74 V108 C926 66 728 68 526 88Z" fill="{c['hairline']}" opacity="{c['reflection_opacity']}"/>
-
-  <g>
-    <text x="76" y="82" fill="{c['muted']}" font-size="10" letter-spacing="2">PORTRAIT.SYS / LIVE</text>
-    <circle cx="450" cy="78" r="4" fill="{c['accent_c']}"><animate attributeName="opacity" values=".35;1;.35" dur="1.7s" repeatCount="indefinite"/></circle>
-    <g><animateTransform attributeName="transform" type="translate" values="0 2;0 -4;0 2" dur="5.5s" repeatCount="indefinite"/>
-      {ascii_rows(c)}
-      <rect x="374" y="475" width="9" height="18" rx="1" fill="{c['accent_b']}"><animate attributeName="opacity" values="1;0;1" dur=".8s" repeatCount="indefinite"/></rect>
+    <g opacity=".42" stroke="{c['portal_b']}" stroke-width="2" fill="none">
+      <path d="M95 440 L148 402 L192 421 L244 350 L290 382 L338 286 L389 318 L448 207 L510 254"/>
+      <path d="M100 462 H574" stroke-opacity=".32"/>
+      <path d="M100 386 H574" stroke-opacity=".18"/>
+      <path d="M100 310 H574" stroke-opacity=".18"/>
     </g>
-    <rect x="64" y="103" width="404" height="2" fill="url(#accent)" opacity=".25"><animate attributeName="y" values="103;520;103" dur="5s" repeatCount="indefinite"/></rect>
-    <text x="76" y="537" fill="{c['muted']}" font-size="9" letter-spacing="1.2">SIGNAL 98.4%  /  HUMAN + MACHINE</text>
+    <g fill="{c['signal']}" opacity=".62">
+      <rect x="130" y="392" width="8" height="42" rx="3"/><rect x="164" y="368" width="8" height="64" rx="3"/>
+      <rect x="198" y="396" width="8" height="31" rx="3"/><rect x="232" y="336" width="8" height="90" rx="3"/>
+      <rect x="266" y="364" width="8" height="61" rx="3"/><rect x="300" y="288" width="8" height="136" rx="3"/>
+    </g>
+    <text x="76" y="82" fill="{c['muted']}" font-size="11" letter-spacing="2.4">THE ALPHA LAB INCIDENT</text>
+    <text x="76" y="104" fill="{c['portal_a']}" font-size="10" font-weight="700" letter-spacing="1.5">EXPERIMENT 07 / SIGNAL UNSTABLE</text>
+    {particles(c)}
+
+    <g id="quant-scientist">
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="5.4s" repeatCount="indefinite"/>
+      <path d="M135 290 L166 194 L202 256 L238 166 L261 257 L314 203 L290 311 L249 340 L167 335 Z" fill="#81D4FA" stroke="#0E1715" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M160 275 C160 220 272 214 285 278 L281 362 C268 409 178 414 160 359 Z" fill="#F3C8A6" stroke="#0E1715" stroke-width="6"/>
+      <path d="M171 280 H220 V314 H171 Z M229 280 H278 V314 H229 Z" fill="#E5F8F5" fill-opacity=".82" stroke="#0E1715" stroke-width="5"/>
+      <path d="M220 296 H229" stroke="#0E1715" stroke-width="5"/>
+      <circle cx="198" cy="297" r="5" fill="#0E1715"/><circle cx="253" cy="297" r="5" fill="#0E1715"/>
+      <path d="M192 340 Q220 362 253 338" fill="none" stroke="#0E1715" stroke-width="5" stroke-linecap="round"/>
+      <path d="M150 380 Q220 342 294 380 L326 526 H116 Z" fill="#E8F0EF" stroke="#0E1715" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M193 375 L220 422 L247 375" fill="{c['portal_b']}" stroke="#0E1715" stroke-width="4"/>
+      <rect x="127" y="402" width="165" height="94" rx="12" fill="#0F1816" stroke="{c['portal_a']}" stroke-width="5" transform="rotate(-8 127 402)"/>
+      <text x="143" y="435" fill="{c['portal_a']}" font-family="SFMono-Regular, Menlo, monospace" font-size="10" transform="rotate(-8 143 435)">rank(ts_delta(</text>
+      <text x="143" y="452" fill="{c['portal_b']}" font-family="SFMono-Regular, Menlo, monospace" font-size="10" transform="rotate(-8 143 452)">signal, 5))</text>
+      <path d="M142 474 L173 461 L199 467 L230 438 L267 449" fill="none" stroke="{c['signal']}" stroke-width="3" transform="rotate(-8 142 474)">
+        <animate attributeName="stroke-opacity" values=".25;1;.25" dur="1.8s" repeatCount="indefinite"/>
+      </path>
+      <circle cx="177" cy="415" r="10" fill="{c['orange']}" stroke="#0E1715" stroke-width="3"/><text x="172" y="420" fill="#0E1715" font-size="12" font-weight="800">Q</text>
+    </g>
+
+    <g id="junior-analyst">
+      <animateTransform attributeName="transform" type="translate" values="0 0;2 3;0 0" dur="3.2s" repeatCount="indefinite"/>
+      <path d="M430 336 C425 263 548 245 566 330 L553 391 C530 416 454 414 432 385 Z" fill="#F6C9A6" stroke="#0E1715" stroke-width="6"/>
+      <path d="M428 309 Q460 235 535 263 Q571 276 571 327 L540 297 L510 318 L475 286 L448 320 Z" fill="#3B4B50" stroke="#0E1715" stroke-width="6" stroke-linejoin="round"/>
+      <ellipse cx="469" cy="339" rx="18" ry="21" fill="#FFFFFF" stroke="#0E1715" stroke-width="4"/><ellipse cx="518" cy="339" rx="18" ry="21" fill="#FFFFFF" stroke="#0E1715" stroke-width="4"/>
+      <circle cx="472" cy="341" r="5" fill="#0E1715"><animate attributeName="r" values="5;2;5" dur="4.8s" repeatCount="indefinite"/></circle>
+      <circle cx="515" cy="341" r="5" fill="#0E1715"><animate attributeName="r" values="5;2;5" dur="4.8s" repeatCount="indefinite"/></circle>
+      <path d="M478 374 Q493 365 509 374" fill="none" stroke="#0E1715" stroke-width="4" stroke-linecap="round"/>
+      <path d="M415 407 Q490 375 569 411 L599 526 H396 Z" fill="#FFB74D" stroke="#0E1715" stroke-width="6"/>
+      <path d="M514 391 L491 432 L467 393" fill="#F8FAFC" stroke="#0E1715" stroke-width="4"/>
+      <g id="research-sheet">
+        <animateTransform attributeName="transform" type="rotate" values="0 548 444;3 548 444;0 548 444" dur="1.6s" repeatCount="indefinite"/>
+        <path d="M534 394 H620 V488 H534 Z" fill="#F8FAFC" stroke="#0E1715" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M550 419 H603 M550 436 H592 M550 453 H611" stroke="#3B4B50" stroke-width="4" stroke-linecap="round"/>
+        <path d="M549 473 L565 457 L579 466 L605 438" fill="none" stroke="{c['signal']}" stroke-width="4"/>
+      </g>
+    </g>
+    <path d="M56 535 H652" stroke="{c['line']}" stroke-opacity=".12"/>
   </g>
 
-  <g>
-    <circle cx="542" cy="79" r="5" fill="#FF5F57"/><circle cx="560" cy="79" r="5" fill="#FEBC2E"/><circle cx="578" cy="79" r="5" fill="#28C840"/>
-    <text x="608" y="83" fill="{c['muted']}" font-size="10" letter-spacing="1.5">NUTHDANAI@RESEARCH:~</text>
-    <rect x="526" y="103" width="590" height="1" fill="{c['hairline']}" opacity="{c['hairline_opacity']}"/>
-    <text x="704" y="143" fill="{c['muted']}" font-size="13">Hi <tspan fill="{c['accent_b']}">👋</tspan>  I'm</text>
-    <text x="704" y="178" fill="{c['text']}" font-size="27" font-weight="750" letter-spacing="-.5">Nuthdanai Wangpratham</text>
-    {typing_phrases(c)}
-    <text x="548" y="143" fill="{c['accent_b']}" font-size="10" letter-spacing="1.5">01</text>
-    <path d="M548 154 V354" stroke="{c['hairline']}" stroke-opacity="{c['hairline_opacity']}"/>
-    <text x="548" y="378" fill="{c['accent_c']}" font-size="10" letter-spacing="1.5">02</text>
-    <path d="M548 389 V493" stroke="{c['hairline']}" stroke-opacity="{c['hairline_opacity']}"/>
-    <text x="548" y="518" fill="{c['accent_a']}" font-size="10" letter-spacing="1.5">03</text>
-    <path d="M574 139 C622 139 640 139 678 139" stroke="url(#accent)" stroke-width="1" opacity=".45"/>
-
-    {details_rows(c)}
-    <text x="704" y="388" fill="{c['text']}" font-size="11" font-weight="700" letter-spacing="1.7">TOOLKIT / SIGNAL STACK</text>
-    {skill_pills(c)}
-
-    <rect x="680" y="486" width="430" height="50" rx="16" fill="{c['panel_alt']}" fill-opacity=".74" stroke="{c['hairline']}" stroke-opacity="{c['hairline_opacity']}"/>
-    <text x="704" y="506" fill="{c['muted']}" font-size="9" letter-spacing="1.6">FIND ME ONLINE</text>
-    <text x="704" y="523" fill="{c['text']}" font-size="11.5" font-weight="650">GH  @nutdnuy</text>
-    <circle cx="819" cy="516" r="2" fill="{c['accent_b']}"/>
-    <text x="833" y="523" fill="{c['text']}" font-size="11.5" font-weight="650">in  nuthdanai-w</text>
-    <circle cx="964" cy="516" r="2" fill="{c['accent_a']}"/>
-    <text x="978" y="523" fill="{c['text']}" font-size="11.5" font-weight="650">YT  @NuthdanaiW</text>
+  <g id="identity-card">
+    <rect x="698" y="42" width="440" height="526" rx="28" fill="url(#cardGradient)" stroke="{c['line']}" stroke-opacity=".10"/>
+    <rect x="720" y="73" width="166" height="28" rx="14" fill="{c['portal_a']}" fill-opacity=".15" stroke="{c['portal_a']}" stroke-opacity=".55"/>
+    <text x="738" y="92" fill="{c['portal_a']}" font-size="10" font-weight="800" letter-spacing="1.6">QUANT LAB / 2026</text>
+    <text x="720" y="161" fill="{c['ink']}" font-size="40" font-weight="800" letter-spacing="-.8">Nuthdanai</text>
+    <text x="720" y="207" fill="{c['ink']}" font-size="40" font-weight="800" letter-spacing="-.8">Wangpratham</text>
+    <path d="M720 232 H1112" stroke="{c['line']}" stroke-opacity=".12"/>
+    <text x="720" y="267" fill="{c['portal_a']}" font-size="18" font-weight="800" letter-spacing="1.1">QUANT RESEARCHER</text>
+    <text x="720" y="295" fill="{c['portal_b']}" font-size="18" font-weight="800" letter-spacing="1.1">· AI AGENT BUILDER</text>
+    <rect x="720" y="316" width="392" height="1" fill="url(#portalGradient)" opacity=".75"><animate attributeName="width" values="100;392;180;392" dur="5s" repeatCount="indefinite"/></rect>
+    {proof_cards(c)}
+    <rect x="720" y="503" width="392" height="42" rx="12" fill="#121212" stroke="{c['line']}" stroke-opacity=".09"/>
+    <circle cx="742" cy="524" r="6" fill="{c['signal']}"><animate attributeName="opacity" values=".35;1;.35" dur="1.7s" repeatCount="indefinite"/></circle>
+    <text x="758" y="528" fill="{c['muted']}" font-size="10" font-weight="700" letter-spacing="1.1">{SCENE['footer']}</text>
   </g>
 </g>
 </svg>
 '''
 
 
-def main():
+def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for theme, colors in THEMES.items():
-        (OUTPUT / f"{theme}.svg").write_text(render(theme, colors), encoding="utf-8")
+        (OUTPUT / f"parody-{theme}.svg").write_text(render(theme, colors), encoding="utf-8")
 
 
 if __name__ == "__main__":
