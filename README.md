@@ -1,9 +1,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero/parody-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero/parody-light.svg">
-  <img alt="Nuthdanai Wangpratham — Quant researcher and AI agent builder" src="./assets/profile-hero/parody-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-hero/cinematic-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-hero/cinematic-light.png">
+  <img alt="Nuthdanai Wangpratham — Quant researcher and AI agent builder" src="./assets/profile-hero/cinematic-light.png" width="100%">
 </picture>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Nuthdanai%20W.-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nuthdanai-w/)

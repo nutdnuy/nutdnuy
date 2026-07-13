@@ -1,26 +1,21 @@
 #!/usr/bin/env python3
-"""Structural checks for the original parody profile hero assets."""
+"""Structural checks for the Image Generator profile hero assets."""
 
 from pathlib import Path
-import xml.etree.ElementTree as ET
+import struct
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets" / "profile-hero"
-TARGETS = (ASSETS / "parody-dark.svg", ASSETS / "parody-light.svg")
+TARGETS = (ASSETS / "cinematic-dark.png", ASSETS / "cinematic-light.png")
 
 
 def verify_asset(path: Path) -> None:
-    text = path.read_text(encoding="utf-8")
-    root = ET.fromstring(text)
-    assert root.attrib["viewBox"] == "0 0 1180 610"
-    assert "<script" not in text and "javascript:" not in text
-    assert "Nuthdanai Wangpratham" in text
-    assert "QUANT RESEARCHER" in text
-    assert "AI AGENT BUILDER" in text
-    assert text.count("<animate") >= 16
-    assert "portal" in text.lower()
-    assert "rick" not in text.lower() and "morty" not in text.lower()
+    header = path.read_bytes()[:24]
+    assert header.startswith(b"\x89PNG\r\n\x1a\n")
+    width, height = struct.unpack(">II", header[16:24])
+    assert (width, height) == (1180, 610)
+    assert path.stat().st_size > 400_000
 
 
 def main() -> None:
@@ -28,8 +23,8 @@ def main() -> None:
         verify_asset(path)
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "./assets/profile-hero/parody-dark.svg" in readme
-    assert "./assets/profile-hero/parody-light.svg" in readme
+    assert "./assets/profile-hero/cinematic-dark.png" in readme
+    assert "./assets/profile-hero/cinematic-light.png" in readme
     print("profile hero checks passed")
 
 
